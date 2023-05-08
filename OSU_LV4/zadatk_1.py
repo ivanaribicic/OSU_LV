@@ -55,6 +55,8 @@ print('Parametri modela: ')
 for i in range(len(linearModel.singular_)):
     print("theta", i, ":", round(linearModel.singular_[i], 5))
 
+print(linearModel.coef_) #printanje parametara fi0,fi1,fi2...
+
 # e)
 y_test_p = linearModel.predict(X_test_n)
 plt.scatter(y_test, y_test_p, c='blue', s=2)
