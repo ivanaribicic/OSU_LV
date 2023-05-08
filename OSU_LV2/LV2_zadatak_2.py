@@ -30,22 +30,16 @@ print('Maksimalna vrijednost visine ' + str(height.max()))
 print('Srednja vrijednost visine ' + str(np.mean(data[:,1])))
 
 #e) muškarci
-males = []
-for person in data:
-    if person[0] == 1:
-        males.append(person[1])
+males = (data[:,0] == 1)
 
-print('Minimalna vrijednost visine muskaraca ' + str(min(males)))
-print('Maksimalna vrijednost visine muskaraca ' + str(max(males)))
-print('Srednja vrijednost visine muskaraca ' + str(statistics.mean(males)))
+print('Minimalna vrijednost visine muskaraca ' + str(min(data[males, 1])))
+print('Maksimalna vrijednost visine muskaraca ' + str(max(data[males, 1])))
+print('Srednja vrijednost visine muskaraca ' + str(np.mean(data[males, 1])))
 
 #e) žene
-females = []
-for person in data:
-    if person[0] == 0:
-        females.append(person[1])
+females = (data[:,0] == 0)
 
-print('Minimalna vrijednost visine zena ' + str(min(females)))
-print('Maksimalna vrijednost visine zena ' + str(max(females)))
-print('Srednja vrijednost visine zena ' + str(statistics.mean(females)))
+print('Minimalna vrijednost visine zena ' + str(min(data[females, 1])))
+print('Maksimalna vrijednost visine zena ' + str(max(data[females, 1])))
+print('Srednja vrijednost visine zena ' + str(np.mean(data[females, 1])))
 
