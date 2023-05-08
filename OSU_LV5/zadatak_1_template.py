@@ -25,7 +25,6 @@ plt.show()
 #b)
 LogRegression_model = LogisticRegression()
 LogRegression_model.fit(X_train, y_train)
-y_test_p = LogRegression_model.predict(X_test)
 
 #c)
 b = LogRegression_model.intercept_[0]
@@ -43,6 +42,8 @@ plt.scatter(X_train[:,0], X_train[:,1], c=y_train, s=10)
 plt.show()
 
 #d)
+y_test_p = LogRegression_model.predict(X_test)
+
 cm = confusion_matrix(y_test, y_test_p)
 print ('Matrica zabune: ', cm)
 disp = ConfusionMatrixDisplay(confusion_matrix(y_test, y_test_p))
