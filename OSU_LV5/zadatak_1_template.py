@@ -27,11 +27,11 @@ LogRegression_model = LogisticRegression()
 LogRegression_model.fit(X_train, y_train)
 
 #c)
-b = LogRegression_model.intercept_[0]
-w1, w2 = LogRegression_model.coef_.T
+theta0 = LogRegression_model.intercept_[0]
+theta1, theta2 = LogRegression_model.coef_.T
 # Calculate the intercept and gradient of the decision boundary.
-c = -b/w2
-m = -w1/w2
+c = -theta0/theta2
+m = -theta1/theta2
 
 xmin, xmax = -3, 3
 ymin, ymax = -3, 3
