@@ -76,9 +76,6 @@ batch_size = batch_size,
 epochs = epochs,
 validation_split = 0.1)
 
-predictions = model.predict(x_test_s)
-predict_class = np.argmax(predictions, axis=1)
-
 #1.6
 score = model.evaluate(x_test_s, y_test_s, verbose=0)
 print('Score')
@@ -86,6 +83,9 @@ print(score)
 
 #1.7
 # TODO: Prikazi test accuracy i matricu zabune
+predictions = model.predict(x_test_s)
+predict_class = np.argmax(predictions, axis=1)
+
 print('Tocnost: ', accuracy_score(y_test, predict_class))
 cm = confusion_matrix(y_test, predict_class)
 disp = ConfusionMatrixDisplay(confusion_matrix(y_test, predict_class))
