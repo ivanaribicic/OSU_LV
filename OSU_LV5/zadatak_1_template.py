@@ -35,9 +35,9 @@ m = -theta1/theta2
 
 xmin, xmax = -3, 3
 ymin, ymax = -3, 3
-xd = np.array([xmin, xmax])
-yd = m*xd + c
-plt.plot(xd, yd, 'k', lw=1, ls='--')
+x1 = np.array([xmin, xmax])
+x2 = m*x1 + c
+plt.plot(x1, x2, 'k', lw=1, ls='--')
 plt.scatter(X_train[:,0], X_train[:,1], c=y_train, s=10)
 plt.show()
 
