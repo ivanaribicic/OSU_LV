@@ -74,13 +74,21 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 values_train, counts_train = np.unique(y_train, return_counts=True)
 values_test, counts_test = np.unique(y_test, return_counts=True)
 
-plt.bar(values_train-0.2, counts_train, width=0.2)
-plt.bar(values_test, counts_test, width=0.2)
+a = [0, 1, 2]
+labels = ['Adelie', 'Chinstrap', 'Gentoo']
+
+plt.bar(values_train-0.2, counts_train, width=0.2, label='Train')
+plt.bar(values_test, counts_test, width=0.2, label='Test')
+
+plt.xticks(a, labels, rotation='vertical')
+plt.xlabel('Vrsta pingvina')
+plt.ylabel('Broj pingvina')
+plt.legend(loc='best')
 plt.show()
 
 #b)
-LogRegression_model = LogisticRegression()
-LogRegression_model.fit(X_train, y_train)
+LogRegression_model = LogisticRegression(max_iter=200)
+LogRegression_model.fit(X_train, np.ravel(y_train)) #ravel returns a contiguous flattened array
 
 #c)
 print('Parametri modela: ')
@@ -88,8 +96,8 @@ print(LogRegression_model.intercept_)
 print(LogRegression_model.coef_.T)
 
 #d)
-#plot_decision_regions(X_train, y_train, LogRegression_model)
-#plt.show()
+plot_decision_regions(X_train, np.ravel(y_train), LogRegression_model)
+plt.show()
 
 #e)
 y_test_p = LogRegression_model.predict(X_test)
@@ -114,11 +122,14 @@ y = df[output_variable].to_numpy()
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 123)
 
-LogRegression_model = LogisticRegression()
+LogRegression_model = LogisticRegression(max_iter=200)
 LogRegression_model.fit(X_train, y_train)
 
 y_test_p = LogRegression_model.predict(X_test)
 
+print('Glavne metrike modela:')
 print(classification_report(y_test, y_test_p))
+
+#povećanjem broja podataka, povećava se i vrijednost metrika modela
 
 
