@@ -62,7 +62,7 @@ X_train_n = sc.fit_transform(X_train)
 X_test_n = sc.transform((X_test))
 
 # Model logisticke regresije
-LogReg_model = LogisticRegression(penalty=None) 
+LogReg_model = LogisticRegression() 
 LogReg_model.fit(X_train_n, y_train)
 
 # Evaluacija modela logisticke regresije
@@ -99,6 +99,7 @@ plt.legend(loc='upper left')
 plt.title("Tocnost: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p_KNN))))
 plt.tight_layout()
 plt.show()
+#granica odluke kod logisticke regresije je linearna, dok je kod KNN modela nelinearna
 
 #1.2
 KNN_model = KNeighborsClassifier(n_neighbors = 1)
@@ -113,6 +114,7 @@ plt.legend(loc='upper left')
 plt.title("Tocnost: (K=1) " + "{:0.3f}".format((accuracy_score(y_train, y_train_p_KNN))))
 plt.tight_layout()
 plt.show()
+#za K=1 imamo overfitting
 
 KNN_model = KNeighborsClassifier(n_neighbors = 100)
 KNN_model.fit(X_train_n , y_train)
@@ -126,14 +128,17 @@ plt.legend(loc='upper left')
 plt.title("Tocnost: (K=100) " + "{:0.3f}".format((accuracy_score(y_train, y_train_p_KNN))))
 plt.tight_layout()
 plt.show()
+#za K=100 imamo underfitting
 
 #2
 KNN_model = KNeighborsClassifier()
 param_grid = {'n_neighbors': range(1, 50)}
 knn_gscv = GridSearchCV(KNN_model, param_grid, cv =5, scoring ='accuracy', n_jobs = -1)
 knn_gscv.fit (X_train_n, y_train )
+print('Optimalna vrijednost parametara za KNN')
 print (knn_gscv.best_params_)
 print (knn_gscv.best_score_)
+#optimalna vrijednost n_neighbors=7
 
 #3
 SVM_model = svm.SVC(kernel ='rbf', gamma = 1, C=12)
@@ -158,5 +163,7 @@ SVM_model = svm.SVC()
 param_grid = {'C': range(1, 100), 'gamma': [10 , 1 , 0.1 , 0.01]}
 svm_gscv = GridSearchCV (SVM_model, param_grid, cv =5, scoring ='accuracy', n_jobs = -1)
 svm_gscv.fit(X_train_n, y_train)
+print('Optimalna vrijednost parametara za SVM')
 print(svm_gscv.best_params_)
 print(svm_gscv.best_score_)
+#optimalna vrijednost C=12, gamma=1
