@@ -39,7 +39,7 @@ def generate_data(n_samples, flagc):
     return X
 
 # generiranje podatkovnih primjera
-X = generate_data(500, 1)
+X = generate_data(15000, 1)
 
 # prikazi primjere u obliku dijagrama rasprsenja
 plt.figure()
@@ -49,13 +49,41 @@ plt.ylabel('$x_2$')
 plt.title('podatkovni primjeri')
 plt.show()
 
+#1
+#imamo 3 grupe u generiranim podacima
+
 #2
-km = KMeans (n_clusters = 3, init = 'random', n_init = 5, random_state = 0)
+km = KMeans (n_clusters = 8, init = 'random', n_init = 5, random_state = 0)
 km.fit(X)
 labels = km.predict(X)
 
 plt.figure()
 plt.scatter(X[:,0],X[:,1], c=labels)
+plt.xlabel('$x_1$')
+plt.ylabel('$x_2$')
+plt.title('podatkovni primjeri')
+plt.show()
+#mijenjanjem broja K početne grupe se dijele na još manje grupe
+
+distortions = []
+K = range(1,10)
+for k in K:
+    kmeanModel = KMeans (n_clusters=k , init ='random',n_init=10 , random_state=0)
+    kmeanModel.fit(X)
+    distortions.append(kmeanModel.inertia_) 
+
+plt.plot(K, distortions, 'bx-')
+plt.xlabel('k')
+plt.title('Lakat metoda')
+plt.show()
+#optimalni broj K=3
+
+km = KMeans (n_clusters=3 , init ='random',n_init=10 , random_state=0) 
+km.fit(X)
+labels = km.predict(X)
+
+plt.figure()
+plt.scatter(X[:,0],X[:,1],s=3,c=labels)
 plt.xlabel('$x_1$')
 plt.ylabel('$x_2$')
 plt.title('podatkovni primjeri')
